@@ -2,71 +2,111 @@ import styled from 'styled-components';
 
 export const DashboardContainer = styled.div`
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #f9fafb;
 `;
 
 export const Header = styled.header`
-  background: white;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #dee2e6;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 `;
 
 export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+`;
+
+export const BrandContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const Logo = styled.img`
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
 `;
 
 export const Title = styled.h1`
   margin: 0;
-  color: #333;
-  font-size: 1.5rem;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 20px;
+`;
+
+export const UserAvatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+`;
+
+export const UserDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `;
 
 export const WelcomeText = styled.span`
-  color: #666;
-  font-size: 0.9rem;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+export const UserName = styled.span`
+  color: #111827;
+  font-size: 14px;
+  font-weight: 600;
 `;
 
 export const LogoutButton = styled.button`
-  padding: 0.5rem 1rem;
-  color: #8b0613fe;
-  border: none;
-  border-radius: 4px;
+  padding: 8px 16px;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
   
   &:hover {
-    background: #c82333;
+    background: #dc2626;
     color: white;
+    border-color: #dc2626;
   }
 `;
 
 export const MainContent = styled.main`
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 32px 24px;
 `;
 
 export const SectionTitle = styled.h2`
-  margin: 0 0 1.5rem 0;
-  color: #333;
-  font-size: 1.25rem;
+  margin: 0 0 24px 0;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 export const SitesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 `;
 
 export const LoadingMessage = styled.div`
