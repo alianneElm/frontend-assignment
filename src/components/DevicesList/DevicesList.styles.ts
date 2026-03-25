@@ -43,14 +43,26 @@ export const DeviceCard = styled.div`
   background: white;
   border: 1px solid #f0f0f0;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 0;
   transition: all 0.2s ease;
+  overflow: hidden;
   
   &:hover {
     border-color: #e0e0e0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
   }
+`;
+
+export const DeviceImage = styled.img`
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #f3f4f6;
+`;
+
+export const DeviceContent = styled.div`
+  padding: 1.5rem;
 `;
 
 export const DeviceHeader = styled.div`

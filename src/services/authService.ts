@@ -23,10 +23,11 @@ export class AuthService {
         throw new Error('Invalid username or password!');
       }
       
-      // Return user without password for security
       return {
         id: user.id,
-        username: user.username
+        username: user.username,
+        avatar: user.avatar,
+        fullName: user.fullName
       };
       
     } catch (error) {

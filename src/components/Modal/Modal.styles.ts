@@ -67,11 +67,3 @@ export const ModalBody = styled.div`
   flex: 1;
 `;
 
-export const ModalFooter = styled.div`
-  padding: 1rem 2rem;
-  border-top: 1px solid #dee2e6;
-  background: #f8f9fa;
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-`;

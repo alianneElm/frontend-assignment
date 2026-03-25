@@ -5,8 +5,7 @@ import {
   ModalHeader,
   ModalTitle,
   CloseButton,
-  ModalBody,
-  ModalFooter
+  ModalBody
 } from './Modal.styles';
 
 interface ModalProps {
@@ -14,15 +13,13 @@ interface ModalProps {
   onClose: () => void;
   title?: string;
   children: ReactNode;
-  footer?: ReactNode;
 }
 
 export const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title,
-  children,
-  footer
+  children
 }) => {
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -67,12 +64,6 @@ export const Modal: React.FC<ModalProps> = ({
         <ModalBody>
           {children}
         </ModalBody>
-        
-        {footer && (
-          <ModalFooter>
-            {footer}
-          </ModalFooter>
-        )}
       </ModalContainer>
     </ModalOverlay>
   );

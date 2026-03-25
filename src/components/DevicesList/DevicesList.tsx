@@ -7,6 +7,8 @@ import {
   ErrorMessage,
   EmptyState,
   DeviceCard,
+  DeviceImage,
+  DeviceContent,
   DeviceHeader,
   DeviceTitle,
   DeviceStatus,
@@ -76,56 +78,66 @@ export const DevicesList: React.FC<DevicesListProps> = ({ siteId, siteName }) =>
     <DevicesContainer>
       {devices.map(device => (
         <DeviceCard key={device.id}>
-          <DeviceHeader>
-            <DeviceTitle>
-              {device.title}
-            </DeviceTitle>
-            <DeviceStatus connected={device.connected} enabled={device.enabled}>
-              <StatusBadge type={device.enabled ? 'enabled' : 'disabled'}>
-                <StatusLight type={device.enabled ? 'enabled' : 'disabled'} />
-                {device.enabled ? 'Active' : 'Inactive'}
-              </StatusBadge>
-              <StatusBadge type={device.connected ? 'connected' : 'disconnected'}>
-                <StatusLight type={device.connected ? 'connected' : 'disconnected'} />
-                {device.connected ? 'Online' : 'Offline'}
-              </StatusBadge>
-            </DeviceStatus>
-          </DeviceHeader>
+          <DeviceImage 
+            src={device.image} 
+            alt={device.title}
+            onError={(e) => {
+              e.currentTarget.src = 'https://via.placeholder.com/300x200/f3f4f6/9ca3af?text=Device+Image';
+            }}
+          />
+          
+          <DeviceContent>
+            <DeviceHeader>
+              <DeviceTitle>
+                {device.title}
+              </DeviceTitle>
+              <DeviceStatus connected={device.connected} enabled={device.enabled}>
+                <StatusBadge type={device.enabled ? 'enabled' : 'disabled'}>
+                  <StatusLight type={device.enabled ? 'enabled' : 'disabled'} />
+                  {device.enabled ? 'Active' : 'Inactive'}
+                </StatusBadge>
+                <StatusBadge type={device.connected ? 'connected' : 'disconnected'}>
+                  <StatusLight type={device.connected ? 'connected' : 'disconnected'} />
+                  {device.connected ? 'Online' : 'Offline'}
+                </StatusBadge>
+              </DeviceStatus>
+            </DeviceHeader>
 
-          <DeviceDescription>{device.description}</DeviceDescription>
+            <DeviceDescription>{device.description}</DeviceDescription>
 
-          <DeviceDetails>
-            <DetailItem>
-              <DetailLabel>Model</DetailLabel>
-              <DetailValue>{device.model}</DetailValue>
-            </DetailItem>
-            <DetailItem>
-              <DetailLabel>Version</DetailLabel>
-              <DetailValue>{device.version}</DetailValue>
-            </DetailItem>
-            <DetailItem>
-              <DetailLabel>Device ID</DetailLabel>
-              <DetailValue>#{device.id}</DetailValue>
-            </DetailItem>
-            <DetailItem>
-              <DetailLabel>Timezone</DetailLabel>
-              <DetailValue>{device.timezone}</DetailValue>
-            </DetailItem>
-          </DeviceDetails>
+            <DeviceDetails>
+              <DetailItem>
+                <DetailLabel>Model</DetailLabel>
+                <DetailValue>{device.model}</DetailValue>
+              </DetailItem>
+              <DetailItem>
+                <DetailLabel>Version</DetailLabel>
+                <DetailValue>{device.version}</DetailValue>
+              </DetailItem>
+              <DetailItem>
+                <DetailLabel>Device ID</DetailLabel>
+                <DetailValue>#{device.id}</DetailValue>
+              </DetailItem>
+              <DetailItem>
+                <DetailLabel>Timezone</DetailLabel>
+                <DetailValue>{device.timezone}</DetailValue>
+              </DetailItem>
+            </DeviceDetails>
 
-          {device.storages.length > 0 && (
-            <StorageSection>
-              <StorageTitle>Storage</StorageTitle>
-              <StorageList>
-                {device.storages.map((storage, index) => (
-                  <StorageItem key={index} state={storage.state}>
-                    <StorageLight state={storage.state} />
-                    {storage.id}
-                  </StorageItem>
-                ))}
-              </StorageList>
-            </StorageSection>
-          )}
+            {device.storages.length > 0 && (
+              <StorageSection>
+                <StorageTitle>Storage</StorageTitle>
+                <StorageList>
+                  {device.storages.map((storage, index) => (
+                    <StorageItem key={index} state={storage.state}>
+                      <StorageLight state={storage.state} />
+                      {storage.id}
+                    </StorageItem>
+                  ))}
+                </StorageList>
+              </StorageSection>
+            )}
+          </DeviceContent>
         </DeviceCard>
       ))}
     </DevicesContainer>

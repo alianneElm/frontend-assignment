@@ -23,21 +23,4 @@ export class SitesService {
     }
   }
 
-  static async getAllSites(): Promise<Site[]> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/sites`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch sites');
-      }
-      
-      return await response.json();
-      
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error;
-      }
-      throw new Error('Failed to load sites');
-    }
-  }
 }
