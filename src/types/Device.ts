@@ -13,5 +13,7 @@ export interface Device {
   enabled: boolean;
   connected: boolean;
   timezone: string;
+  image: string;
+  thumbnail: string;
   storages: DeviceStorage[];
 }

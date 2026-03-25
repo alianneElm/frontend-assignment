@@ -1,8 +1,26 @@
 {
   "sites": [
-    { "id": 1, "title": "Demo site 1", "owner": "demouser1" },
-    { "id": 2, "title": "Demo site 2", "owner": "demouser1" },
-    { "id": 3, "title": "Demo site 3", "owner": "demouser2" }
+    { 
+      "id": 1, 
+      "title": "Stockholm Office", 
+      "owner": "demouser1",
+      "image": "https://picsum.photos/id/325/400/250",
+      "location": "Stockholm, Sweden"
+    },
+    { 
+      "id": 2, 
+      "title": "Warehouse District", 
+      "owner": "demouser1",
+      "image": "https://picsum.photos/id/127/400/250",
+      "location": "Industrial Zone"
+    },
+    { 
+      "id": 3, 
+      "title": "Retail Store", 
+      "owner": "demouser2",
+      "image": "https://picsum.photos/id/342/400/250",
+      "location": "Downtown Center"
+    }
   ],
   "devices": [
     {
@@ -15,6 +33,8 @@
       "enabled": true,
       "connected": true,
       "timezone": "CET-1",
+      "image": "https://picsum.photos/id/96/300/200",
+      "thumbnail": "https://picsum.photos/id/96/80/60",
       "storages": [
         { "id": "NetworkShare", "state": "ok" },
         { "id": "SDCard", "state": "ok" }
@@ -30,6 +50,8 @@
       "enabled": true,
       "connected": false,
       "timezone": "CET-1",
+      "image": "https://picsum.photos/id/180/300/200",
+      "thumbnail": "https://picsum.photos/id/180/80/60",
       "storages": [
         { "id": "NetworkShare", "state": "ok" },
         { "id": "SDCard", "state": "unavailable" }
@@ -45,20 +67,25 @@
       "enabled": false,
       "connected": true,
       "timezone": "CET-1",
+      "image": "https://picsum.photos/id/119/300/200",
+      "thumbnail": "https://picsum.photos/id/119/80/60",
       "storages": [
         { "id": "NetworkShare", "state": "ok" },
         { "id": "SDCard", "state": "ok" }
       ]
     },
-    { "id": 4,
-     "site_id": 2,
-     "title": "Demo camera 4",
-     "description": "Overview of warehouse",
-     "model": "Q8641-E",
-     "version": "7.30",
-     "enabled": true,
-     "connected": true,
-     "timezone": "CET-1",
+    {
+      "id": 4,
+      "site_id": 2,
+      "title": "Demo camera 4",
+      "description": "Overview of warehouse",
+      "model": "Q8641-E",
+      "version": "7.30",
+      "enabled": true,
+      "connected": true,
+      "timezone": "CET-1",
+      "image": "https://picsum.photos/id/201/300/200",
+      "thumbnail": "https://picsum.photos/id/201/80/60",
       "storages": [
         { "id": "NetworkShare", "state": "ok" }
       ]
@@ -73,6 +100,8 @@
       "enabled": true,
       "connected": true,
       "timezone": "CET-1",
+      "image": "https://picsum.photos/id/268/300/200",
+      "thumbnail": "https://picsum.photos/id/268/80/60",
       "storages": []
     },
     {
@@ -85,6 +114,8 @@
       "enabled": false,
       "connected": true,
       "timezone": "CET-1",
+      "image": "https://picsum.photos/id/175/300/200",
+      "thumbnail": "https://picsum.photos/id/175/80/60",
       "storages": [
         { "id": "SDCard", "state": "ok" }
       ]
@@ -94,12 +125,16 @@
     {
       "id": 1,
       "username": "demouser1",
-      "password": "demo123"
+      "password": "demo123",
+      "avatar": "https://i.pravatar.cc/150?u=1",
+      "fullName": "Sarah Anderson"
     },
     {
       "id": 2,
       "username": "demouser2",
-      "password": "demo456"
+      "password": "demo456",
+      "avatar": "https://i.pravatar.cc/150?u=2",
+      "fullName": "Sebastian Mitchell"
     }
   ]
 }
