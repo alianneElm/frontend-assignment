@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks';
 import { Site } from '../../types';
 import { SitesService } from '../../services/sitesService';
+import { Modal } from '../../components/Modal';
+import { DevicesList } from '../../components/DevicesList';
 import {
   DashboardContainer,
   Header,
@@ -23,6 +25,8 @@ export const Dashboard: React.FC = () => {
   const [sites, setSites] = useState<Site[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedSite, setSelectedSite] = useState<Site | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadSites = async () => {
@@ -49,6 +53,16 @@ export const Dashboard: React.FC = () => {
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleSiteClick = (site: Site) => {
+    setSelectedSite(site);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedSite(null);
   };
 
   if (!user) {
@@ -84,13 +98,29 @@ export const Dashboard: React.FC = () => {
         ) : (
           <SitesGrid>
             {sites.map(site => (
-              <div key={site.id} style={{
-                background: 'white',
-                padding: '1.5rem',
-                borderRadius: '8px',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                border: '1px solid #dee2e6'
-              }}>
+              <div 
+                key={site.id} 
+                onClick={() => handleSiteClick(site)}
+                style={{
+                  background: 'white',
+                  padding: '1.5rem',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                  border: '1px solid #dee2e6',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#007bff';
+                  e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#dee2e6';
+                  e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
                 <h3 style={{ margin: '0 0 0.5rem 0', color: '#333' }}>
                   {site.title}
                 </h3>
@@ -100,11 +130,33 @@ export const Dashboard: React.FC = () => {
                 <p style={{ margin: '0.5rem 0 0 0', color: '#666', fontSize: '0.9rem' }}>
                   Site ID: #{site.id}
                 </p>
+                <p style={{ 
+                  margin: '1rem 0 0 0', 
+                  color: '#007bff', 
+                  fontSize: '0.8rem',
+                  fontWeight: '500'
+                }}>
+                  View devices
+                </p>
               </div>
             ))}
           </SitesGrid>
         )}
       </MainContent>
+
+      {/* Devices Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title={selectedSite ? `Devices in ${selectedSite.title}` : ''}
+      >
+        {selectedSite && (
+          <DevicesList 
+            siteId={selectedSite.id} 
+            siteName={selectedSite.title}
+          />
+        )}
+      </Modal>
     </DashboardContainer>
   );
 };
