@@ -17,6 +17,13 @@ export const CardContainer = styled.div`
     box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
     transform: translateY(-1px);
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
 `;
 
 export const SiteImage = styled.img`
@@ -64,6 +71,12 @@ export const SiteDetails = styled.div`
   gap: 16px;
   align-items: center;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const DetailChip = styled.div`
@@ -87,7 +100,7 @@ export const DetailValue = styled.span`
 `;
 
 export const ActionButton = styled.button`
-  color: #656668;
+  color: rgb(20, 95, 132);
   border: none;
   padding: 12px 24px;
   border-radius: 10px;
@@ -95,17 +108,22 @@ export const ActionButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(60, 62, 67, 0.3);
+  box-shadow: 0 4px 15px rgba(28, 68, 88, 0.35);
   flex-shrink: 0;
   
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(117, 118, 123, 0.4);
-    background: #656668;
+    background: rgb(20, 95, 132);
     color: white;
   }
   
   &:active {
     transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 8px;
   }
 `;

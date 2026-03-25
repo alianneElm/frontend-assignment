@@ -18,6 +18,14 @@ export const HeaderContent = styled.div`
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 24px;
+
+  @media (max-width: 768px) {
+    padding: 0 12px;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
 `;
 
 export const BrandContainer = styled.div`
@@ -94,6 +102,10 @@ export const MainContent = styled.main`
   max-width: 1400px;
   margin: 0 auto;
   padding: 32px 24px;
+
+  @media (max-width: 768px) {
+    padding: 16px 12px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
