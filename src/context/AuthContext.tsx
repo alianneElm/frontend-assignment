@@ -25,7 +25,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const storedUser = localStorage.getItem('securityPlatform_user');
         if (storedUser) {
           const parsedUser = JSON.parse(storedUser);
-          setUser(parsedUser);
+          
+          if (parsedUser?.id && parsedUser?.username && parsedUser?.fullName) {
+            setUser(parsedUser);
+          } else {
+            localStorage.removeItem('securityPlatform_user');
+          }
         }
       } catch (error) {
         console.error('Error loading user from storage:', error);

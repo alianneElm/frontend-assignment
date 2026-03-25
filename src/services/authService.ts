@@ -7,6 +7,8 @@ export class AuthService {
     
     const user = users.find(u => u.username === credentials.username);
     
+    // TODO: In production, passwords should be encryted and validated server-side
+    // This is a mock implementation for demo purposes only
     if (!user || user.password !== credentials.password) {
       throw new Error('Invalid username or password!');
     }
