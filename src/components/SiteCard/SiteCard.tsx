@@ -1,4 +1,5 @@
 import React from 'react';
+import { Building2 } from 'lucide-react';
 import { Site } from '../../types';
 import {
   CardContainer,
@@ -22,13 +23,9 @@ interface SiteCardProps {
 export const SiteCard: React.FC<SiteCardProps> = ({ site, onClick }) => {
   return (
     <CardContainer>
-      <SiteImage 
-        src={site.image} 
-        alt={site.title}
-        onError={(e) => {
-          e.currentTarget.src = 'https://via.placeholder.com/60x60/f3f4f6/9ca3af?text=Site';
-        }}
-      />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', backgroundColor: '#f3f4f6', borderRadius: '50%' }}>
+        <Building2 size={32} color="#145f84" />
+      </div>
       
       <SiteInfo>
         <SiteHeader>

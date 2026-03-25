@@ -1,4 +1,4 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect, useCallback, ReactNode } from 'react';
 import {
   ModalOverlay,
   ModalContainer,
@@ -21,23 +21,24 @@ export const Modal: React.FC<ModalProps> = ({
   title,
   children
 }) => {
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+  // For preventing re-creation on every render
+  const handleEscape = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose();
     }
+  }, [onClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.addEventListener('keydown', handleEscape);
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, handleEscape]);
 
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {

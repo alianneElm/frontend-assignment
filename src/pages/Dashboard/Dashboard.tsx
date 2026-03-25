@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Shield, User } from 'lucide-react';
 import { useAuth } from '../../hooks';
 import { Site } from '../../types';
 import { SitesService } from '../../services/sitesService';
@@ -33,28 +34,44 @@ export const Dashboard: React.FC = () => {
   const [error, setError] = useState('');
   const [selectedSite, setSelectedSite] = useState<Site | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [logoVisible, setLogoVisible] = useState(true);
 
   useEffect(() => {
-    const loadSites = async () => {
-      if (!user) return;
+    if (!user) return;
 
+    const abortController = new AbortController();
+
+    const loadSites = async () => {
       try {
         setLoading(true);
         setError('');
         const userSites = await SitesService.getSitesByUser(user.username);
-        setSites(userSites);
+        
+        // Only update state if request wasn't aborted
+        if (!abortController.signal.aborted) {
+          setSites(userSites);
+        }
       } catch (err) {
+        if (abortController.signal.aborted) return;
+        
         if (err instanceof Error) {
           setError(err.message);
         } else {
           setError('Failed to load sites');
         }
       } finally {
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
 
     loadSites();
+
+    // Abort request just in case component unmounts or user changes
+    return () => {
+      abortController.abort();
+    };
   }, [user]);
 
   const handleLogout = () => {
@@ -80,23 +97,11 @@ export const Dashboard: React.FC = () => {
       <Header>
         <HeaderContent>
           <BrandContainer>
-            <Logo 
-              src="/images/logo.png" 
-              alt="Security Platform Logo"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-              }}
-            />
+            <Shield size={32} color="#145f84" />
             <Title>Security Platform</Title>
           </BrandContainer>
           <UserInfo>
-            <UserAvatar 
-              src={user.avatar} 
-              alt={user.fullName}
-              onError={(e) => {
-                e.currentTarget.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.fullName) + '&size=40&background=e5e7eb&color=6b7280';
-              }}
-            />
+            <User size={40} color="#6b7280" />
             <UserDetails>
               <UserName>{user.fullName}</UserName>
               <WelcomeText>@{user.username}</WelcomeText>

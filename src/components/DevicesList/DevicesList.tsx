@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Video, Volume2 } from 'lucide-react';
 import { Device } from '../../types';
 import { DevicesService } from '../../services/devicesService';
 import {
@@ -7,7 +8,6 @@ import {
   ErrorMessage,
   EmptyState,
   DeviceCard,
-  DeviceImage,
   DeviceContent,
   DeviceHeader,
   DeviceTitle,
@@ -37,24 +37,40 @@ export const DevicesList: React.FC<DevicesListProps> = ({ siteId, siteName }) =>
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const abortController = new AbortController();
+    
     const loadDevices = async () => {
       try {
         setLoading(true);
         setError('');
         const siteDevices = await DevicesService.getDevicesBySite(siteId);
-        setDevices(siteDevices);
+        
+        // Update state in case request wasn't aborted
+        if (!abortController.signal.aborted) {
+          setDevices(siteDevices);
+        }
       } catch (err) {
+        // Don't show errors for aborted requests
+        if (abortController.signal.aborted) return;
+        
         if (err instanceof Error) {
           setError(err.message);
         } else {
           setError('Failed to load devices');
         }
       } finally {
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
 
     loadDevices();
+    
+    // Abort request in case component unmounts or siteId changes
+    return () => {
+      abortController.abort();
+    };
   }, [siteId]);
 
   if (loading) {
@@ -78,17 +94,16 @@ export const DevicesList: React.FC<DevicesListProps> = ({ siteId, siteName }) =>
     <DevicesContainer>
       {devices.map(device => (
         <DeviceCard key={device.id}>
-          <DeviceImage 
-            src={device.image} 
-            alt={device.title}
-            onError={(e) => {
-              e.currentTarget.src = 'https://via.placeholder.com/300x200/f3f4f6/9ca3af?text=Device+Image';
-            }}
-          />
-          
           <DeviceContent>
             <DeviceHeader>
-              <DeviceTitle>
+              <DeviceTitle style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', backgroundColor: '#ffffff', borderRadius: '50%', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+                  {device.title.toLowerCase().includes('hornspeaker') || device.title.toLowerCase().includes('speaker') ? (
+                    <Volume2 size={20} color="#145f84" />
+                  ) : (
+                    <Video size={20} color="#145f84" />
+                  )}
+                </div>
                 {device.title}
               </DeviceTitle>
               <DeviceStatus connected={device.connected} enabled={device.enabled}>
