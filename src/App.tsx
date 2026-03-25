@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { useAuth } from './hooks';
 import { Login } from './pages/Login';
+import { Dashboard } from './pages/Dashboard';
 
 const AppContent: React.FC = () => {
   const { user } = useAuth();
@@ -10,12 +11,7 @@ const AppContent: React.FC = () => {
     return <Login />;
   }
 
-  return (
-    <div>
-      <h1>Welcome, {user.username}!</h1>
-      <p>Dashboard here...</p>
-    </div>
-  );
+  return <Dashboard />;
 };
 
 export const App: React.FC = () => {
