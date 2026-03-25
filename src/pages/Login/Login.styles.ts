@@ -78,21 +78,3 @@ export const ErrorMessage = styled.div`
   color: #dc3545;
   margin-bottom: 2rem;
 `;
-
-export const DemoCredentials = styled.div`
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #e9ecef9f;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  
-  h4 {
-    margin: 0 0 0.5rem 0;
-    color: #191c20;
-  }
-  
-  p {
-    margin: 0.25rem 0;
-    color: #6c757d;
-  }
-`;

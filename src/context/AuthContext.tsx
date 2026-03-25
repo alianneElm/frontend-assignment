@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { AuthenticatedUser, LoginCredentials } from '../types';
 import { AuthService } from '../services/authService';
 
@@ -17,15 +17,35 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AuthenticatedUser | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadUserFromStorage = () => {
+      try {
+        const storedUser = localStorage.getItem('securityPlatform_user');
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          setUser(parsedUser);
+        }
+      } catch (error) {
+        console.error('Error loading user from storage:', error);
+        localStorage.removeItem('securityPlatform_user');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadUserFromStorage();
+  }, []);
 
   const login = async (credentials: LoginCredentials): Promise<void> => {
     setIsLoading(true);
     try {
       const authenticatedUser = await AuthService.login(credentials);
       setUser(authenticatedUser);
+      localStorage.setItem('securityPlatform_user', JSON.stringify(authenticatedUser));
     } catch (error) {
-      throw error; // handle later in component
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -33,6 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = (): void => {
     setUser(null);
+    localStorage.removeItem('securityPlatform_user');
   };
 
   const value: AuthContextType = {

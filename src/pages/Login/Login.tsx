@@ -9,8 +9,7 @@ import {
   Label,
   Input,
   Button,
-  ErrorMessage,
-  DemoCredentials
+  ErrorMessage
 } from './Login.styles';
 
 export const Login: React.FC = () => {
@@ -70,12 +69,6 @@ export const Login: React.FC = () => {
             {isLoading ? 'Logging in...' : 'Login'}
           </Button>
         </LoginForm>
-        
-        <DemoCredentials>
-          <h4>Demo Credentials:</h4>
-          <p><strong>User 1:</strong> demouser1 / demo123</p>
-          <p><strong>User 2:</strong> demouser2 / demo456</p>
-        </DemoCredentials>
       </LoginCard>
     </LoginContainer>
   );

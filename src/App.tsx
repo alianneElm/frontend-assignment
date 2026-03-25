@@ -5,7 +5,22 @@ import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 
 const AppContent: React.FC = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '16px',
+        color: '#6b7280'
+      }}>
+        Loading...
+      </div>
+    );
+  }
 
   if (!user) {
     return <Login />;
