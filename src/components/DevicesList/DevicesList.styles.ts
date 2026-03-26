@@ -79,7 +79,9 @@ export const DeviceTitle = styled.h4`
   font-weight: 600;
 `;
 
-export const DeviceStatus = styled.div<{ connected: boolean; enabled: boolean }>`
+export const DeviceStatus = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['connected', 'enabled'].includes(prop),
+})<{ connected: boolean; enabled: boolean }>`
   display: flex;
   gap: 1rem;
   align-items: center;
