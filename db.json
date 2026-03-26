@@ -3,19 +3,19 @@
     { 
       "id": 1, 
       "title": "Stockholm Office", 
-      "owner": "demouser1",
+      "owner_id": 1,
       "location": "Stockholm, Sweden"
     },
     { 
       "id": 2, 
       "title": "Warehouse District", 
-      "owner": "demouser1",
+      "owner_id": 1,
       "location": "Industrial Zone"
     },
     { 
       "id": 3, 
       "title": "Retail Store", 
-      "owner": "demouser2",
+      "owner_id": 2,
       "location": "Downtown Center"
     }
   ],

@@ -1,6 +1,6 @@
 export interface Site {
   id: number;
   title: string;
-  owner: string;
+  owner_id: number;
   location: string;
 }
