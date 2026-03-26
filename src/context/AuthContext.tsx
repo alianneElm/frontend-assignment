@@ -7,6 +7,8 @@ export interface AuthContextType {
   login: (credentials: LoginCredentials) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
+  error: string;
+  clearError: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -18,6 +20,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AuthenticatedUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const loadUserFromStorage = () => {
@@ -45,12 +48,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (credentials: LoginCredentials): Promise<void> => {
     setIsLoading(true);
+    setError(''); // Clear any previous error
     try {
       const authenticatedUser = await AuthService.login(credentials);
       setUser(authenticatedUser);
       localStorage.setItem('securityPlatform_user', JSON.stringify(authenticatedUser));
     } catch (error) {
-      throw error;
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unexpected error occurred');
+      }
+      throw error; // Still throw for the component to handle if needed
     } finally {
       setIsLoading(false);
     }
@@ -58,14 +67,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = (): void => {
     setUser(null);
+    setError(''); // Clear any error on logout
     localStorage.removeItem('securityPlatform_user');
+  };
+
+  const clearError = (): void => {
+    setError('');
   };
 
   const value: AuthContextType = {
     user,
     login,
     logout,
-    isLoading
+    isLoading,
+    error,
+    clearError
   };
 
   return (
