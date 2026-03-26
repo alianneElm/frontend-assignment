@@ -54,13 +54,6 @@ export const UserInfo = styled.div`
   gap: 20px;
 `;
 
-export const UserAvatar = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #e5e7eb;
-`;
 
 export const UserDetails = styled.div`
   display: flex;

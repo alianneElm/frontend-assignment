@@ -14,7 +14,6 @@ import {
   Logo,
   Title,
   UserInfo,
-  UserAvatar,
   UserDetails,
   WelcomeText,
   UserName,

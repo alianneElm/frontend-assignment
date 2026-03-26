@@ -26,14 +26,6 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const SiteImage = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #f1f5f9;
-  flex-shrink: 0;
-`;
 
 export const SiteInfo = styled.div`
   flex: 1;

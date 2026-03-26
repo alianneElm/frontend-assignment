@@ -3,7 +3,6 @@ import { Building2 } from 'lucide-react';
 import { Site } from '../../types';
 import {
   CardContainer,
-  SiteImage,
   SiteInfo,
   SiteHeader,
   SiteTitle,

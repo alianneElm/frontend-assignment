@@ -54,12 +54,6 @@ export const DeviceCard = styled.div`
   }
 `;
 
-export const DeviceImage = styled.img`
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 1px solid #f3f4f6;
-`;
 
 export const DeviceContent = styled.div`
   padding: 1.5rem;
