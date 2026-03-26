@@ -3,6 +3,7 @@ import { Building2 } from 'lucide-react';
 import { Site } from '../../types';
 import {
   CardContainer,
+  SiteIconContainer,
   SiteInfo,
   SiteHeader,
   SiteTitle,
@@ -22,9 +23,9 @@ interface SiteCardProps {
 export const SiteCard: React.FC<SiteCardProps> = ({ site, onClick }) => {
   return (
     <CardContainer>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', backgroundColor: '#f3f4f6', borderRadius: '50%' }}>
+      <SiteIconContainer>
         <Building2 size={32} color="#145f84" />
-      </div>
+      </SiteIconContainer>
       
       <SiteInfo>
         <SiteHeader>

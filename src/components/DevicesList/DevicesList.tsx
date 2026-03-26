@@ -11,6 +11,8 @@ import {
   DeviceContent,
   DeviceHeader,
   DeviceTitle,
+  TitleWrapper,
+  IconContainer,
   DeviceStatus,
   StatusBadge,
   StatusLight,
@@ -96,16 +98,16 @@ export const DevicesList: React.FC<DevicesListProps> = ({ siteId, siteName }) =>
         <DeviceCard key={device.id}>
           <DeviceContent>
             <DeviceHeader>
-              <DeviceTitle style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', backgroundColor: '#ffffff', borderRadius: '50%', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+              <TitleWrapper>
+                <IconContainer>
                   {device.title.toLowerCase().includes('hornspeaker') || device.title.toLowerCase().includes('speaker') ? (
                     <Volume2 size={20} color="#145f84" />
                   ) : (
                     <Video size={20} color="#145f84" />
                   )}
-                </div>
-                {device.title}
-              </DeviceTitle>
+                </IconContainer>
+                <DeviceTitle>{device.title}</DeviceTitle>
+              </TitleWrapper>
               <DeviceStatus connected={device.connected} enabled={device.enabled}>
                 <StatusBadge type={device.enabled ? 'enabled' : 'disabled'}>
                   <StatusLight type={device.enabled ? 'enabled' : 'disabled'} />

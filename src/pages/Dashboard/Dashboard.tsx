@@ -96,11 +96,11 @@ export const Dashboard: React.FC = () => {
       <Header>
         <HeaderContent>
           <BrandContainer>
-            <Shield size={32} color="#145f84" />
+            <Shield size={35} color="#145f84" />
             <Title>Security Platform</Title>
           </BrandContainer>
           <UserInfo>
-            <User size={40} color="#6b7280" />
+            <User size={35} color="#6b7280" />
             <UserDetails>
               <UserName>{user.fullName}</UserName>
               <WelcomeText>@{user.username}</WelcomeText>

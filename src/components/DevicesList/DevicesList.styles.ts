@@ -73,6 +73,23 @@ export const DeviceTitle = styled.h4`
   font-weight: 600;
 `;
 
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
 export const DeviceStatus = styled.div.withConfig({
   shouldForwardProp: (prop) => !['connected', 'enabled'].includes(prop),
 })<{ connected: boolean; enabled: boolean }>`
@@ -90,25 +107,18 @@ export const StatusBadge = styled.div<{ type: 'enabled' | 'disabled' | 'connecte
   color: #6b7280;
 `;
 
-export const StatusLight = styled.div<{ type: 'enabled' | 'disabled' | 'connected' | 'disconnected' }>`
+const statusStyles = {
+  enabled: 'background: #10b981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);',
+  disabled: 'background: #9ca3af; box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);',
+  connected: 'background: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);',
+  disconnected: 'background: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);'
+} as const;
+
+export const StatusLight = styled.div<{ type: keyof typeof statusStyles }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  
-  ${props => {
-    switch (props.type) {
-      case 'enabled':
-        return 'background: #10b981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);';
-      case 'disabled':
-        return 'background: #9ca3af; box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);';
-      case 'connected':
-        return 'background: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);';
-      case 'disconnected':
-        return 'background: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);';
-      default:
-        return 'background: #9ca3af; box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);';
-    }
-  }}
+  ${props => statusStyles[props.type] || statusStyles.disabled}
 `;
 
 export const DeviceDescription = styled.p`

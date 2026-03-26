@@ -27,6 +27,17 @@ export const CardContainer = styled.div`
 `;
 
 
+export const SiteIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  flex-shrink: 0;
+`;
+
 export const SiteInfo = styled.div`
   flex: 1;
   display: flex;
