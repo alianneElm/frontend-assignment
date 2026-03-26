@@ -11,7 +11,6 @@ import {
   Header,
   HeaderContent,
   BrandContainer,
-  Logo,
   Title,
   UserInfo,
   UserDetails,
@@ -33,7 +32,6 @@ export const Dashboard: React.FC = () => {
   const [error, setError] = useState('');
   const [selectedSite, setSelectedSite] = useState<Site | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [logoVisible, setLogoVisible] = useState(true);
 
   useEffect(() => {
     if (!user) return;

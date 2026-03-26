@@ -34,12 +34,6 @@ export const BrandContainer = styled.div`
   gap: 12px;
 `;
 
-export const Logo = styled.img`
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  border-radius: 8px;
-`;
 
 export const Title = styled.h1`
   margin: 0;

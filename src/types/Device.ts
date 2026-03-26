@@ -1,17 +1,6 @@
-export enum StorageState {
-  OK = 'ok',
-  UNAVAILABLE = 'unavailable'
-}
-
-export enum DeviceStatus {
-  ACTIVE = 'active',      // enabled and connected
-  OFFLINE = 'offline',    // enabled but disconnected  
-  DISABLED = 'disabled'   // not enabled
-}
-
 export interface DeviceStorage {
   id: string;
-  state: StorageState;
+  state: 'ok' | 'unavailable';
 }
 
 export interface Device {
@@ -24,7 +13,5 @@ export interface Device {
   enabled: boolean;
   connected: boolean;
   timezone: string;
-  image: string;
-  thumbnail: string;
   storages: DeviceStorage[];
 }
