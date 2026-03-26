@@ -37,7 +37,6 @@ npm run dev
 npm run dev         # Start development server
 npm run api         # Start JSON server API
 npm run build       # Build for production
-npm run preview     # Preview production build
 npm test            # Run test suite
 ```
 
