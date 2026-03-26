@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import React from 'react'
 import { AuthProvider, AuthContext } from '../AuthContext'
 import { useAuth } from '../../hooks'
+import { AuthenticatedUser } from '../../types'
 
 vi.mock('../../services/authService', () => ({
   AuthService: {
@@ -183,8 +184,8 @@ describe('AuthContext', () => {
   })
 
   it('shows loading state during login', async () => {
-    let resolveLogin: (value: any) => void
-    const loginPromise = new Promise((resolve) => {
+    let resolveLogin: (value: AuthenticatedUser) => void
+    const loginPromise = new Promise<AuthenticatedUser>((resolve) => {
       resolveLogin = resolve
     })
     mockAuthService.login.mockReturnValue(loginPromise)
