@@ -1,45 +1,94 @@
-# Assignment
+# Security Platform Frontend
 
-Your assignment is to implement a small single-page application (SPA), in
-JavaScript with React and TypeScript, which displays sites and their devices.
+A React TypeScript application for managing security sites and devices. This single-page application allows users to authenticate and view their assigned security sites with associated devices. Users can browse device details including status information and storage configurations.
 
-Even though the assignment is small we would like you to imagine it as part of
-a bigger application where you need to use good practices to ease scaling,
-prevent regressions of bugs and keep a well formed code base. You should also
-imagine that the project will be shared with a number of other developers
-which need to understand the code to make changes and additions. Remember that
-you are doing this to show us what you are good at, every little detail
-matters.
+## Getting Started
 
-We would like the finished solution to at least be able to:
+### Prerequisites
+- Node.js 16 or higher
+- npm
 
-- Display all the sites available to a specific user
-- Allow interaction with sites to display additional information about the
-  devices associated with each site
+### Installation
 
-A site represents a collection of devices, typically based on a geographic
-location. A device can represent a camera, video encoder, storage unit, etc.
+1. Install dependencies:
+```bash
+npm install
+```
 
-As a data source, we've prepared a simulated REST API for you using
-json-server. Start it by running:
-
+2. Start the API server:
+```bash
 npm run api
+```
 
-Use this API to fetch the available data. You can change the passwords or any
-other fields in db.json to whatever you want. Remember to tell us the
-passwords when you send in your assignment.
+3. Start the development server (in a separate terminal):
+```bash
+npm run dev
+```
 
-You can read more about json-server at:
+4. Open http://localhost:5173 in your browser
 
-https://github.com/typicode/json-server
+### Test Credentials
+- User 1: `demouser1` / password: `demo123`
+- User 2: `demouser2` / password: `demo456`
 
-We would appreciate it if you used git for version control (so that we can use
-`git log` to see the development process) but you're not required to do so.
+## Development Commands
 
-Last but not least, you need to send clear instructions on how the application
-is started so that we can view the result.
+```bash
+npm run dev         # Start development server
+npm run api         # Start JSON server API
+npm run build       # Build for production
+npm run preview     # Preview production build
+npm test            # Run test suite
+```
 
+## Technical Implementation
 
-Good luck!
+### Technology Stack
+- React 18 with TypeScript
+- Styled Components for styling
+- Vitest and React Testing Library for testing
+- JSON Server for API simulation
+- React Context for state management
 
-Team Applications at New Business
+### Project Structure
+```
+src/
+├── components/     # Reusable UI components
+├── context/        # React Context providers
+├── hooks/          # Custom React hooks
+├── pages/          # Application pages
+├── services/       # API service layer
+├── types/          # TypeScript definitions
+└── utils/          # Utility functions
+```
+
+### Key Features
+- Authentication with localStorage persistence
+- Responsive design
+- Comprehensive error handling
+- Loading states and user feedback
+- Modal-based device detail views
+- Security-focused API design using ID-based filtering
+
+Run tests with coverage:
+```bash
+npm test
+```
+
+## Production Build
+
+To create a production build:
+```bash
+npm run build
+```
+
+The built files will be in the `dist/` directory.
+
+## API Structure
+
+The application uses a JSON-based mock API with endpoints for:
+- User authentication
+- Sites filtered by user ownership (id)
+- Device information by site
+
+All API interactions use numeric IDs for security and performance.
