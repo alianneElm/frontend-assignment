@@ -29,7 +29,7 @@ describe('Dashboard', () => {
     {
       id: 1,
       title: 'Test Site',
-      owner: 'testuser',
+      owner_id: 1,
       location: 'Test Location'
     }
   ]
@@ -173,9 +173,9 @@ describe('Dashboard', () => {
 
   it('renders multiple sites correctly', async () => {
     const multipleSites = [
-      { id: 1, title: 'Site One', owner: 'testuser', location: 'Location 1' },
-      { id: 2, title: 'Site Two', owner: 'testuser', location: 'Location 2' },
-      { id: 3, title: 'Site Three', owner: 'testuser', location: 'Location 3' }
+      { id: 1, title: 'Site One', owner_id: 1, location: 'Location 1' },
+      { id: 2, title: 'Site Two', owner_id: 1, location: 'Location 2' },
+      { id: 3, title: 'Site Three', owner_id: 1, location: 'Location 3' }
     ]
     
     SitesService.getSitesByUser = vi.fn().mockResolvedValue(multipleSites)
@@ -260,13 +260,13 @@ describe('Dashboard', () => {
       {
         id: 1,
         title: 'Café & Restaurant "Cuba Cafe"',
-        owner: 'testuser',
+        owner_id: 1,
         location: 'São Paulo, Brazil (GPS: -23.5505, -46.6333)'
       },
       {
         id: 2,
         title: 'משרד תל-אביב',
-        owner: 'testuser',
+        owner_id: 1,
         location: '北京市朝阳区'
       }
     ]
@@ -294,8 +294,8 @@ describe('Dashboard', () => {
     })
   })
 
-  it('calls SitesService with correct username', async () => {
-    const testUser = { id: 1, username: 'specific-user', fullName: 'Specific User' }
+  it('calls SitesService with correct user ID', async () => {
+    const testUser = { id: 123, username: 'specific-user', fullName: 'Specific User' }
     
     mockUseAuth.mockReturnValue({
       user: testUser,
@@ -309,7 +309,7 @@ describe('Dashboard', () => {
     render(<Dashboard />)
     
     await waitFor(() => {
-      expect(getSitesByUserSpy).toHaveBeenCalledWith('specific-user')
+      expect(getSitesByUserSpy).toHaveBeenCalledWith(123)
     })
   })
 
@@ -338,7 +338,7 @@ describe('Dashboard', () => {
     rerender(<Dashboard />)
     
     await waitFor(() => {
-      expect(SitesService.getSitesByUser).toHaveBeenCalledWith('user2')
+      expect(SitesService.getSitesByUser).toHaveBeenCalledWith(2)
     }, { timeout: 200 })
   })
 
@@ -347,7 +347,7 @@ describe('Dashboard', () => {
     const siteWithLongTitle = {
       id: 1,
       title: 'Very Long Site Name That Could Test Modal Title Handling',
-      owner: 'testuser',
+      owner_id: 1,
       location: 'Test Location'
     }
     

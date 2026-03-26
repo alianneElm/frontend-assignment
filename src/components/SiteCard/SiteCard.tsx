@@ -40,8 +40,8 @@ export const SiteCard: React.FC<SiteCardProps> = ({ site, onClick }) => {
           </DetailChip>
           
           <DetailChip>
-            <DetailLabel>Owner:</DetailLabel>
-            <DetailValue>{site.owner}</DetailValue>
+            <DetailLabel>Owner ID:</DetailLabel>
+            <DetailValue>#{site.owner_id}</DetailValue>
           </DetailChip>
           
           <DetailChip>

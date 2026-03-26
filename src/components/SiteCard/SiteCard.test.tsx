@@ -6,7 +6,7 @@ describe('SiteCard', () => {
   const mockSite = {
     id: 1,
     title: 'Test Site',
-    owner: 'testuser',
+    owner_id: 123,
     location: 'Test Location'
   }
 
@@ -15,7 +15,7 @@ describe('SiteCard', () => {
     
     expect(screen.getByText('Test Site')).toBeInTheDocument()
     expect(screen.getByText('#1')).toBeInTheDocument()
-    expect(screen.getByText('testuser')).toBeInTheDocument()
+    expect(screen.getByText('#123')).toBeInTheDocument()
     expect(screen.getByText('Test Location')).toBeInTheDocument()
   })
 

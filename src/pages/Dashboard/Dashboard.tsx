@@ -42,7 +42,7 @@ export const Dashboard: React.FC = () => {
       try {
         setLoading(true);
         setError('');
-        const userSites = await SitesService.getSitesByUser(user.username);
+        const userSites = await SitesService.getSitesByUser(user.id);
         
         // Only update state if request wasn't aborted
         if (!abortController.signal.aborted) {
