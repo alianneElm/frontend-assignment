@@ -187,7 +187,9 @@ export const StorageItem = styled.div<{ state: 'ok' | 'unavailable' }>`
   color: #6b7280;
 `;
 
-export const StorageLight = styled.div<{ state: 'ok' | 'unavailable' }>`
+export const StorageLight = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'state'
+})<{ state: 'ok' | 'unavailable' }>`
   width: 6px;
   height: 6px;
   border-radius: 50%;
