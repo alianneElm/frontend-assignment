@@ -34,7 +34,7 @@ describe('SitesService', () => {
 
     const result = await SitesService.getSitesByUser(1)
 
-    expect(apiClient.get).toHaveBeenCalledWith('/sites?owner_id=1&_sort=title&_order=asc')
+    expect(apiClient.get).toHaveBeenCalledWith('/sites?owner_id=1&_sort=title')
     expect(result).toEqual(mockSites)
   })
 
