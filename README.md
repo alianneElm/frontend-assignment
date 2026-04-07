@@ -25,6 +25,11 @@ npm run api
 npm run dev
 ```
 
+4. Start sebSocket (in a separate terminal):
+```bash
+npm run ws
+```
+
 4. Open http://localhost:5173 in your browser
 
 ### Test Credentials
