@@ -4,7 +4,8 @@ import userEvent from '@testing-library/user-event'
 import { Dashboard } from './Dashboard'
 
 vi.mock('../../hooks', () => ({
-  useAuth: vi.fn()
+  useAuth: vi.fn(),
+  useWebSocket: vi.fn()
 }))
 
 vi.mock('../../services/sitesService', () => ({

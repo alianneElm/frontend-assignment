@@ -2,6 +2,10 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { DevicesList } from './DevicesList'
 
+vi.mock('../../hooks', () => ({
+  useWebSocket: vi.fn()
+}))
+
 vi.mock('../../services/devicesService', () => ({
   DevicesService: {
     getDevicesBySite: vi.fn()

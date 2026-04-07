@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Video, Volume2 } from 'lucide-react';
 import { Device } from '../../types';
 import { DevicesService } from '../../services/devicesService';
+import { useWebSocket } from '../../hooks';
 import {
   DevicesContainer,
   LoadingMessage,
@@ -68,12 +69,29 @@ export const DevicesList: React.FC<DevicesListProps> = ({ siteId, siteName }) =>
     };
 
     loadDevices();
-    
+
     // Abort request in case component unmounts or siteId changes
     return () => {
       abortController.abort();
     };
   }, [siteId]);
+
+  useWebSocket('ws://localhost:8080', (data) => {
+    const event = data as {
+      type: string;
+      payload: { deviceId: number; connected: boolean; enabled: boolean };
+    };
+
+    if (event.type === 'DEVICE_STATUS_CHANGED') {
+      setDevices(prev =>
+        prev.map(device =>
+          device.id === event.payload.deviceId
+            ? { ...device, connected: event.payload.connected, enabled: event.payload.enabled }
+            : device
+        )
+      );
+    }
+  });
 
   if (loading) {
     return <LoadingMessage>Loading devices for {siteName}...</LoadingMessage>;
